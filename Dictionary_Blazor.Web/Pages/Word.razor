@@ -1,0 +1,37 @@
+﻿@page "/envie"
+@inherits WordBase
+<PageTitle>English to Vietnamese</PageTitle>
+<input type="search" class="form-control rounded" placeholder="Search"
+	   aria-label="Search" aria-describedby="search-addon" 
+	   @bind-value="searchword" @bind-value:event="oninput"
+	   @onkeyup='async () => await GetSuggestWord(searchword)' />
+<button class="btn btn-primary" @onclick='async () => await GetWordSpecificWord(searchword)'>Find</button>
+
+@if (Words != null)
+{
+	int i = 0;
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col">Words</th>
+				<th scope="col">Definition</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var w in Words)
+			{
+				<tr>
+					<th scope="row">@i</th>
+					<td>@w.Keyword</td>
+					<td>@w.Definition</td>
+				</tr>
+				i++;
+			}
+		</tbody>
+	</table>
+}
+
+@code {
+
+}
